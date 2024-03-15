@@ -6,21 +6,27 @@ import (
 	"servermonitor/pkg/handlers"
 )
 
+type AuthHandler struct {
+	DB *gorm.DB
+}
+
+func (h *AuthHandler) Login(c echo.Context) error {
+	return handlers.Login(c, h.DB)
+}
+
+func (h *AuthHandler) Registration(c echo.Context) error {
+	return handlers.Register(c, h.DB)
+}
+
 func RegisterUserRouters(app *echo.Group, db *gorm.DB) {
 	authGroup := app.Group("/auth")
 	userGroup := app.Group("/user")
 
 	// auth routers
+	authHandlers := &AuthHandler{DB: db}
 
-	registrationHandler := func(c echo.Context) error {
-		return handlers.Register(c, db)
-	}
-	loginHandler := func(c echo.Context) error {
-		return handlers.Login(c, db)
-	}
-
-	authGroup.POST("/register", registrationHandler)
-	authGroup.POST("/login", loginHandler)
+	authGroup.POST("/register", authHandlers.Registration)
+	authGroup.POST("/login", authHandlers.Login)
 
 	// user routers
 	userGroup.GET("/me", handlers.UserMe)
