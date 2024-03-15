@@ -12,8 +12,6 @@ func RegisterUserRouters(app *echo.Group, db *gorm.DB) {
 
 	// auth routers
 
-	authGroup.POST("/logout", handlers.Logout)
-
 	registrationHandler := func(c echo.Context) error {
 		return handlers.Register(c, db)
 	}

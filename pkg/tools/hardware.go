@@ -2,17 +2,17 @@ package tools
 
 import (
 	ps "github.com/mitchellh/go-ps"
-	"servermonitor/pkg/schemas"
+	"servermonitor/pkg/types"
 )
 
-func GetProcessList() ([]schemas.Process, error) {
+func GetProcessList() ([]types.Process, error) {
 	processList, err := ps.Processes()
 	if err != nil {
 		return nil, err
 	}
-	var activeProcess []schemas.Process
+	var activeProcess []types.Process
 	for _, process := range processList {
-		activeProcess = append(activeProcess, schemas.Process{
+		activeProcess = append(activeProcess, types.Process{
 			Pid:  process.Pid(),
 			Name: process.Executable(),
 		})

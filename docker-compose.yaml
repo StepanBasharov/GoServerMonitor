@@ -25,3 +25,6 @@ services:
         - /proc:/host_proc:ro
     ports:
       - "8888:8888"
+    depends_on:
+      - db
+      - redis
