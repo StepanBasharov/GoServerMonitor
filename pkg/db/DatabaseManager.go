@@ -2,6 +2,7 @@ package db
 
 import (
 	"fmt"
+	"github.com/google/uuid"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"servermonitor/pkg/db/models"
@@ -30,11 +31,13 @@ func CreateConnection(config schemas.DatabaseConfig) (*gorm.DB, error) {
 func CreateSuperUser(db *gorm.DB, config schemas.SuperUserConfig) {
 	var superuser []models.Users
 
-	db.Where("isSuperUser = ?", true).Find(&superuser)
+	db.Where("is_super_user = ?", true).Find(&superuser)
 	passwordHash := tools.CreateHashPassword(config.Password)
 	if len(superuser) == 0 {
 		db.Create(&models.Users{
+			UserId:         uuid.New(),
 			UserName:       config.Username,
+			Email:          config.Email,
 			HashedPassword: passwordHash,
 			IsSuperUser:    true,
 			IsVerify:       true,

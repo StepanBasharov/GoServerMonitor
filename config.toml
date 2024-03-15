@@ -11,4 +11,4 @@ port = 5432
 [superuser]
 username = "superuser"
 password = "superuser"
-email = "stepbash124@gmail.com"
+email = "stepbashsuperuser@gmail.com"

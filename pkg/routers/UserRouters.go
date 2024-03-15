@@ -11,9 +11,18 @@ func RegisterUserRouters(app *echo.Group, db *gorm.DB) {
 	userGroup := app.Group("/user")
 
 	// auth routers
-	authGroup.POST("/login", handlers.Login)
+
 	authGroup.POST("/logout", handlers.Logout)
-	authGroup.POST("/register", handlers.Register)
+
+	registrationHandler := func(c echo.Context) error {
+		return handlers.Register(c, db)
+	}
+	loginHandler := func(c echo.Context) error {
+		return handlers.Login(c, db)
+	}
+
+	authGroup.POST("/register", registrationHandler)
+	authGroup.POST("/login", loginHandler)
 
 	// user routers
 	userGroup.GET("/me", handlers.UserMe)
