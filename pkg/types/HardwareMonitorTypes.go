@@ -1,4 +1,4 @@
-package schemas
+package types
 
 type Process struct {
 	Pid  int    `json:"pid"`
