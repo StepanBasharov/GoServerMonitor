@@ -1,5 +1,7 @@
 [server]
 port = 8888
+[server.auth]
+secret = "secret"
 
 [database]
 host = "db"
@@ -7,6 +9,10 @@ username = "server"
 password = "server"
 database = "server_monitor"
 port = 5432
+
+[redis]
+host = "redis"
+port = 6379
 
 [superuser]
 username = "superuser"

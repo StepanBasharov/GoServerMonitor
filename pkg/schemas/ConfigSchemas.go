@@ -1,7 +1,12 @@
 package schemas
 
+type ServerAuth struct {
+	Secret string
+}
+
 type ServerConfig struct {
 	Port int
+	Auth ServerAuth
 }
 
 type DatabaseConfig struct {
@@ -18,8 +23,14 @@ type SuperUserConfig struct {
 	Email    string
 }
 
+type RedisConfig struct {
+	Host string
+	Port int
+}
+
 type Config struct {
 	Server    ServerConfig
 	Database  DatabaseConfig
 	Superuser SuperUserConfig
+	Redis     RedisConfig
 }
