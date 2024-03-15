@@ -70,5 +70,5 @@ func main() {
 	conn := SetUpDatabase(conf)
 	CreateSuperUser(conf, conn)
 	SetUpRouters(server, conn)
-	server.Logger.Info(server.Start(fmt.Sprintf(":%d", conf.Server.Port)))
+	server.Logger.Info(server.Start(fmt.Sprintf("%s:%d", conf.Server.Host, conf.Server.Port)))
 }

@@ -5,6 +5,7 @@ type ServerAuth struct {
 }
 
 type ServerConfig struct {
+	Host string
 	Port int
 	Auth ServerAuth
 }
