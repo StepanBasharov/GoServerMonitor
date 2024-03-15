@@ -1,0 +1,14 @@
+[server]
+port = 8888
+
+[database]
+host = "db"
+username = "server"
+password = "server"
+database = "server_monitor"
+port = 5432
+
+[superuser]
+username = "superuser"
+password = "superuser"
+email = "stepbash124@gmail.com"
